@@ -76,6 +76,18 @@ const displayMovements = function (movements) {
   });
 };
 displayMovements(account1.movements);
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .spliit(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -162,7 +174,24 @@ GOOD LUCK 😀
 // checkDogs(realDogs, kateDogs);
 
 const eurToUsd = 1.1;
-const movementsUSD = movements.map(function (mov) {
-  return mov * eurToUsd;
-});
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * eurToUsd;
+// });
+const movementsUSD = movements.map(mov => mov * eurToUsd);
 console.log(movements, movementsUSD);
+const movementsUSDfor = [];
+
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'depsoited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+// if (mov > 0) {
+//   return `Movement ${i + 1}: You depsoited ${mov}`;
+// } else {
+//   return `Movement ${i + 1}: You withdrew ${Math.abs(mov)}`;
+// }
